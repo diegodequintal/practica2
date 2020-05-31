@@ -15,16 +15,16 @@ var CameraOption = /** @class */ (function () {
     function CameraOption(decoratedCamera) {
         this.decoratedCamera = decoratedCamera;
     }
-    CameraOption.prototype.takePhoto = function () {
-        this.decoratedCamera.takePhoto();
+    CameraOption.prototype.add = function () {
+        this.decoratedCamera.add();
     };
     return CameraOption;
 }());
 var ConcreteCamera = /** @class */ (function () {
     function ConcreteCamera() {
     }
-    ConcreteCamera.prototype.takePhoto = function () {
-        return 'Taking photo';
+    ConcreteCamera.prototype.add = function () {
+        return 'Making camera';
     };
     return ConcreteCamera;
 }());
@@ -33,8 +33,8 @@ var WithSaturation = /** @class */ (function (_super) {
     function WithSaturation(camera) {
         return _super.call(this, camera) || this;
     }
-    WithSaturation.prototype.takePhoto = function () {
-        return this.decoratedCamera.takePhoto() + ', with saturation';
+    WithSaturation.prototype.add = function () {
+        return this.decoratedCamera.add() + ' with saturation option';
     };
     return WithSaturation;
 }(CameraOption));
@@ -43,8 +43,8 @@ var WithGloss = /** @class */ (function (_super) {
     function WithGloss(camera) {
         return _super.call(this, camera) || this;
     }
-    WithGloss.prototype.takePhoto = function () {
-        return this.decoratedCamera.takePhoto() + ', with Gloss';
+    WithGloss.prototype.add = function () {
+        return this.decoratedCamera.add() + ', with gloss option';
     };
     return WithGloss;
 }(CameraOption));
@@ -53,12 +53,12 @@ var WithContrast = /** @class */ (function (_super) {
     function WithContrast(camera) {
         return _super.call(this, camera) || this;
     }
-    WithContrast.prototype.takePhoto = function () {
-        return this.decoratedCamera.takePhoto() + ', with constrast';
+    WithContrast.prototype.add = function () {
+        return this.decoratedCamera.add() + ', with contrast option';
     };
     return WithContrast;
 }(CameraOption));
 var oldCamera = new ConcreteCamera();
 var newGenerationCamera = new WithContrast(new WithGloss(new WithSaturation(new ConcreteCamera())));
-console.log('1) Old camera: ' + oldCamera.takePhoto());
-console.log('2) New camera: ' + newGenerationCamera.takePhoto());
+console.log('1) Old camera: ' + oldCamera.add());
+console.log('2) New camera: ' + newGenerationCamera.add());

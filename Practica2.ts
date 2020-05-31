@@ -1,5 +1,5 @@
 interface Camera {
-  takePhoto()
+  add()
 }
 
 class CameraOption implements Camera {
@@ -7,14 +7,14 @@ class CameraOption implements Camera {
   constructor(decoratedCamera: Camera) {
     this.decoratedCamera = decoratedCamera
   }
-  takePhoto() {
-    this.decoratedCamera.takePhoto()
+  add() {
+    this.decoratedCamera.add()
   }
 }
 
 class ConcreteCamera implements Camera {
-  takePhoto() {
-    return 'Taking photo'
+  add() {
+    return 'Making camera'
   }
 }
 
@@ -23,8 +23,8 @@ class WithSaturation extends CameraOption {
     super(camera)
   }
 
-  public takePhoto() {
-    return this.decoratedCamera.takePhoto() + ', with saturation'
+  public add() {
+    return this.decoratedCamera.add() + ' with saturation option'
   }
 }
 
@@ -33,8 +33,8 @@ class WithGloss extends CameraOption {
     super(camera)
   }
 
-  public takePhoto() {
-    return this.decoratedCamera.takePhoto() + ', with Gloss'
+  public add() {
+    return this.decoratedCamera.add() + ', with gloss option'
   }
 }
 
@@ -43,8 +43,8 @@ class WithContrast extends CameraOption {
     super(camera)
   }
 
-  public takePhoto() {
-    return this.decoratedCamera.takePhoto() + ', with constrast'
+  public add() {
+    return this.decoratedCamera.add() + ', with contrast option'
   }
 }
 
@@ -54,5 +54,5 @@ let newGenerationCamera = new WithContrast(
   new WithGloss(new WithSaturation(new ConcreteCamera()))
 )
 
-console.log('1) Old camera: ' + oldCamera.takePhoto())
-console.log('2) New camera: ' + newGenerationCamera.takePhoto())
+console.log('1) Old camera: ' + oldCamera.add())
+console.log('2) New camera: ' + newGenerationCamera.add())
